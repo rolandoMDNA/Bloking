@@ -7,6 +7,7 @@ bl_info = {
     "description": "Herramienta procedural para generar blocking anatómico de personajes y criaturas.",
     "warning": "",
     "category": "Add Mesh",
+    "type": "addon",
 }
 
 import bpy
