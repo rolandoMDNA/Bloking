@@ -99,9 +99,9 @@ def generate_human_blocking(context):
     blocks.append(head)
     
     # BRAZO IZQUIERDO (L)
-    # Calculamos la posición del hombro relativa al pecho
-    shoulder_x = chest.scale.x / 2 + 0.08
-    shoulder_z = chest.location.z + (chest.scale.z / 2) - 0.05
+    # Calculamos la posición del hombro relativa al pecho para que se toquen
+    shoulder_x = chest.scale.x / 2 + (0.06 * props.arm_width / 2)
+    shoulder_z = chest.location.z + (chest.scale.z / 2) - (0.06 * props.arm_width / 2)
     
     upper_arm_L = create_block(
         name="DEF-upper_arm.L",
@@ -151,7 +151,7 @@ def generate_human_blocking(context):
     
     
     # PIERNA IZQUIERDA (L)
-    hip_x = pelvis.scale.x / 2 - 0.05
+    hip_x = pelvis.scale.x / 2 - (0.08 * props.leg_width / 2)
     hip_z = pelvis.location.z - (pelvis.scale.z / 2)
     
     thigh_L = create_block(
@@ -265,8 +265,13 @@ class VIEW3D_PT_BlokingPanel(bpy.types.Panel):
 
     def draw(self, context):
         layout = self.layout
-        props = context.scene.bloking_props
         
+        try:
+            props = context.scene.bloking_props
+        except AttributeError:
+            layout.label(text="Refresca el addon / Guarda y recarga")
+            return
+            
         layout.operator(BLOKING_OT_GenerateHuman.bl_idname, icon='OUTLINER_OB_ARMATURE')
         
         layout.label(text="Proporciones Generales:", icon='VIEWPORT')
