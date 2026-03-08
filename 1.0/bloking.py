@@ -259,8 +259,8 @@ class VIEW3D_PT_BlokingPanel(bpy.types.Panel):
     bl_label = "Bloking (Humano)"
     bl_idname = "VIEW3D_PT_bloking_human"
     bl_space_type = 'VIEW_3D'
-    bl_region_type = 'UI'
-    bl_category = "Bloking"
+    bl_region_type = 'UI' # Esto asegura que abra en el Panel N
+    bl_category = "Bloking" # Nombre de la Pestaña en el Panel N
 
     def draw(self, context):
         layout = self.layout
